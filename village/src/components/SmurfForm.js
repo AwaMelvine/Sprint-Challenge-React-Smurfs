@@ -1,12 +1,60 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import styled from "styled-components";
+
+const SmurfFormWrapper = styled.div`
+  width: 50%;
+  margin: 2rem auto;
+  background: white;
+  border-radius: 0.5rem 0.5rem 0 0;
+`;
+
+const StyledSmurfForm = styled.div`
+  width: 50%;
+  margin: 0px auto;
+  padding: 1rem;
+  border-radius: 0.5rem;
+
+  input {
+    display: block;
+    width: 100%;
+    margin-bottom: 0.35rem;
+    height: 50px;
+    outline: none;
+    border: 1px solid #dfdfdf;
+    padding: 0.5rem 1rem;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    border-radius: 0.3rem;
+    font-weight: lighter;
+  }
+`;
+
+const SubmitButton = styled.button`
+  border: none;
+  cursor: pointer;
+  font-weight: normal;
+  outline: none;
+  border-radius: 5px;
+  width: 100%;
+  text-align: center;
+  line-height: 1em;
+  padding: 1.125rem 2rem;
+  font-size: 1.2em;
+  background: #3e8989;
+  color: #fff;
+
+  &:hover {
+    background: #306b6b;
+  }
+`;
 
 class SmurfForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      age: '',
-      height: ''
+      name: "",
+      age: "",
+      height: ""
     };
   }
 
@@ -15,11 +63,11 @@ class SmurfForm extends Component {
     // add code to create the smurf using the api
 
     this.setState({
-      name: '',
-      age: '',
-      height: ''
+      name: "",
+      age: "",
+      height: ""
     });
-  }
+  };
 
   handleInputChange = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -27,29 +75,30 @@ class SmurfForm extends Component {
 
   render() {
     return (
-      <div className="SmurfForm">
-        <form onSubmit={this.addSmurf}>
+      <SmurfFormWrapper>
+        <StyledSmurfForm onSubmit={this.addSmurf}>
           <input
             onChange={this.handleInputChange}
-            placeholder="name"
+            placeholder="Name"
             value={this.state.name}
             name="name"
           />
           <input
+            type="number"
             onChange={this.handleInputChange}
-            placeholder="age"
+            placeholder="Age"
             value={this.state.age}
             name="age"
           />
           <input
             onChange={this.handleInputChange}
-            placeholder="height"
+            placeholder="Height"
             value={this.state.height}
             name="height"
           />
-          <button type="submit">Add to the village</button>
-        </form>
-      </div>
+          <SubmitButton type="submit">Add to the village</SubmitButton>
+        </StyledSmurfForm>
+      </SmurfFormWrapper>
     );
   }
 }
