@@ -8,6 +8,10 @@ const StyledSmurfsWrapper = styled.div`
   border-top: 2px solid #e0e0e0;
   background: white;
   padding: 20px;
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+  }
 `;
 
 class Smurfs extends Component {
