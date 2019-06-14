@@ -43,22 +43,22 @@ class App extends Component {
   }
   async componentDidMount() {
     const { data } = await axios.get(`${smurfsApi}/smurfs`);
-    this.setState({ smurfs: data });
+    this.setState({ ...this.state, smurfs: data });
   }
   // add any needed code to ensure that the smurfs collection exists on state and it has data coming from the server
   // Notice what your map function is looping over and returning inside of Smurfs.
   // You'll need to make sure you have the right properties on state and pass them down to props.
   createSmurf = async smurf => {
     const { data } = await axios.post(`${smurfsApi}/smurfs`, smurf);
-    this.setState({ smurfs: data });
+    this.setState({ ...this.state, smurfs: data });
   };
   updateSmurf = async smurf => {
     const { data } = await axios.put(`${smurfsApi}/smurfs/${smurf.id}`, smurf);
-    this.setState({ smurfs: data });
+    this.setState({ ...this.state, smurfs: data, editing: false });
   };
   deleteSmurf = async id => {
     const { data } = await axios.delete(`${smurfsApi}/smurfs/${id}`);
-    this.setState({ smurfs: data });
+    this.setState({ ...this.state, smurfs: data });
   };
   findSmurf = id => {
     const smurf = this.state.smurfs.find(smurf => smurf.id === id);

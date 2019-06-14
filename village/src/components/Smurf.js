@@ -14,6 +14,7 @@ const Delete = styled.span`
   top: 1.5rem;
   cursor: pointer;
   color: #ef6e6e;
+  z-index: 5;
 `;
 
 const Edit = styled(Link)`
@@ -31,7 +32,15 @@ const Smurf = props => {
         <h3>{props.name}</h3>
         <strong>{props.height} tall</strong>
         <p>{props.age} smurf years old</p>
-        <Delete onClick={() => props.deleteSmurf(props.id)}>delete</Delete>
+        <Delete
+          onClick={event => {
+            event.preventDefault();
+            event.stopPropagation();
+            props.deleteSmurf(props.id);
+          }}
+        >
+          delete
+        </Delete>
         <Edit
           to={`/update-smurf/${props.id}`}
           onClick={() => props.findSmurf(props.id)}

@@ -15,7 +15,7 @@ const StyledSmurfsWrapper = styled.div`
   }
 `;
 
-const SmurfWrapper = styled(Link)`
+const SmurfWrapper = styled.div`
   text-decoration: none;
   color: unset;
   border: 1px solid #8cd1d1;
@@ -38,8 +38,11 @@ class Smurfs extends Component {
           {this.props.smurfs.map(smurf => {
             return (
               <SmurfWrapper
-                to={`/smurf/${smurf.id}`}
-                onClick={() => findSmurf(smurf.id)}
+                key={smurf.id}
+                onClick={() => {
+                  findSmurf(smurf.id);
+                  this.props.history.push(`/smurf/${smurf.id}`);
+                }}
               >
                 <Smurf
                   deleteSmurf={deleteSmurf}
@@ -47,7 +50,6 @@ class Smurfs extends Component {
                   id={smurf.id}
                   age={smurf.age}
                   height={smurf.height}
-                  key={smurf.id}
                   findSmurf={findSmurf}
                 />
               </SmurfWrapper>
