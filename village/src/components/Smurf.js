@@ -21,7 +21,7 @@ const Delete = styled.span`
   right: 1.5rem;
   top: 1.5rem;
   cursor: pointer;
-  color: #ef6e6e  ;
+  color: #ef6e6e ;
 `;
 
 const Smurf = props => {

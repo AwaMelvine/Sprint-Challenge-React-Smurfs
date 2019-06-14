@@ -8,7 +8,7 @@ const SmurfFormWrapper = styled.div`
   border-radius: 0.5rem 0.5rem 0 0;
 `;
 
-const StyledSmurfForm = styled.div`
+const StyledSmurfForm = styled.form`
   width: 50%;
   margin: 0px auto;
   padding: 1rem;
@@ -61,7 +61,7 @@ class SmurfForm extends Component {
   addSmurf = event => {
     event.preventDefault();
     // add code to create the smurf using the api
-
+    this.props.createSmurf(this.state);
     this.setState({
       name: "",
       age: "",
@@ -70,17 +70,18 @@ class SmurfForm extends Component {
   };
 
   handleInputChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({ ...this.state, [e.target.name]: e.target.value });
   };
 
   render() {
     return (
       <SmurfFormWrapper>
-        <StyledSmurfForm onSubmit={this.addSmurf}>
+        <StyledSmurfForm onSubmit={event => this.addSmurf(event)}>
           <input
             onChange={this.handleInputChange}
             placeholder="Name"
             value={this.state.name}
+            onChange={event => this.handleInputChange(event)}
             name="name"
           />
           <input
@@ -88,12 +89,14 @@ class SmurfForm extends Component {
             onChange={this.handleInputChange}
             placeholder="Age"
             value={this.state.age}
+            onChange={event => this.handleInputChange(event)}
             name="age"
           />
           <input
             onChange={this.handleInputChange}
             placeholder="Height"
             value={this.state.height}
+            onChange={event => this.handleInputChange(event)}
             name="height"
           />
           <SubmitButton type="submit">Add to the village</SubmitButton>
