@@ -16,6 +16,7 @@ const StyledSmurfsWrapper = styled.div`
 
 class Smurfs extends Component {
   render() {
+    const { deleteSmurf } = this.props;
     return (
       <StyledSmurfsWrapper>
         <h1>Smurf Village</h1>
@@ -23,6 +24,7 @@ class Smurfs extends Component {
           {this.props.smurfs.map(smurf => {
             return (
               <Smurf
+                deleteSmurf={deleteSmurf}
                 name={smurf.name}
                 id={smurf.id}
                 age={smurf.age}

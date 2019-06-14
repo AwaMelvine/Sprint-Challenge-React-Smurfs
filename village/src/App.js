@@ -45,6 +45,10 @@ class App extends Component {
     const { data } = await axios.post(`${smurfsApi}/smurfs`, smurf);
     this.setState({ smurfs: data });
   };
+  deleteSmurf = async id => {
+    const { data } = await axios.delete(`${smurfsApi}/smurfs/${id}`);
+    this.setState({ smurfs: data });
+  };
   render() {
     return (
       <div className="App">
@@ -55,7 +59,13 @@ class App extends Component {
         <Route
           exact
           path="/"
-          render={props => <Smurfs {...props} smurfs={this.state.smurfs} />}
+          render={props => (
+            <Smurfs
+              {...props}
+              smurfs={this.state.smurfs}
+              deleteSmurf={this.deleteSmurf}
+            />
+          )}
         />
         <Route
           path="/smurf-form"

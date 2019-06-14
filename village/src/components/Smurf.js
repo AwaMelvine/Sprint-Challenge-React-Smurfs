@@ -21,7 +21,7 @@ const Delete = styled.span`
   right: 1.5rem;
   top: 1.5rem;
   cursor: pointer;
-  color: #ef6e6e ;
+  color: #ef6e6e;
 `;
 
 const Smurf = props => {
@@ -31,7 +31,7 @@ const Smurf = props => {
         <h3>{props.name}</h3>
         <strong>{props.height} tall</strong>
         <p>{props.age} smurf years old</p>
-        <Delete>x</Delete>
+        <Delete onClick={() => props.deleteSmurf(props.id)}>x</Delete>
       </StyledSmurf>
     </React.Fragment>
   );
