@@ -3,15 +3,6 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const StyledSmurf = styled.div`
-  border: 1px solid #8cd1d1;
-  margin: 0.5rem;
-  width: 47%;
-  flex-grow: 1;
-  border-radius: 0.35rem;
-  text-align: left;
-  padding: 1.5rem;
-  position: relative;
-
   h3 {
     margin-top: 0px;
   }

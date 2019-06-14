@@ -109,6 +109,18 @@ class App extends Component {
             />
           )}
         />
+        <Route
+          path="/smurf/:id"
+          render={props => (
+            <Smurfs
+              single={true}
+              {...props}
+              smurfs={[this.state.smurf]}
+              deleteSmurf={this.deleteSmurf}
+              findSmurf={this.findSmurf}
+            />
+          )}
+        />
       </div>
     );
   }
