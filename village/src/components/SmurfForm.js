@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const SmurfFormWrapper = styled.div`
   width: 50%;
-  margin: 2rem auto;
+  margin: 2rem auto 0px;
   background: white;
   border-radius: 0.5rem 0.5rem 0 0;
 `;

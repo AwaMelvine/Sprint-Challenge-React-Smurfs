@@ -1,11 +1,19 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import styled from "styled-components";
+import Smurf from "./Smurf";
 
-import Smurf from './Smurf';
+const StyledSmurfsWrapper = styled.div`
+  width: 50%;
+  margin: 0px auto 0px;
+  border-top: 2px solid #e0e0e0;
+  background: white;
+  padding: 20px;
+`;
 
 class Smurfs extends Component {
   render() {
     return (
-      <div className="Smurfs">
+      <StyledSmurfsWrapper>
         <h1>Smurf Village</h1>
         <ul>
           {this.props.smurfs.map(smurf => {
@@ -20,13 +28,13 @@ class Smurfs extends Component {
             );
           })}
         </ul>
-      </div>
+      </StyledSmurfsWrapper>
     );
   }
 }
 
 Smurf.defaultProps = {
- smurfs: [],
+  smurfs: []
 };
 
 export default Smurfs;
