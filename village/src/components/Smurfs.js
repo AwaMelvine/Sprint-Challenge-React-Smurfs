@@ -16,7 +16,7 @@ const StyledSmurfsWrapper = styled.div`
 
 class Smurfs extends Component {
   render() {
-    const { deleteSmurf } = this.props;
+    const { deleteSmurf, findSmurf } = this.props;
     return (
       <StyledSmurfsWrapper>
         <h1>Smurf Village</h1>
@@ -30,6 +30,7 @@ class Smurfs extends Component {
                 age={smurf.age}
                 height={smurf.height}
                 key={smurf.id}
+                findSmurf={findSmurf}
               />
             );
           })}

@@ -31,7 +31,14 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      smurfs: []
+      smurfs: [],
+      smurf: {
+        id: "",
+        name: "",
+        age: "",
+        height: ""
+      },
+      editing: false
     };
   }
   async componentDidMount() {
@@ -45,11 +52,20 @@ class App extends Component {
     const { data } = await axios.post(`${smurfsApi}/smurfs`, smurf);
     this.setState({ smurfs: data });
   };
+  updateSmurf = async smurf => {
+    const { data } = await axios.put(`${smurfsApi}/smurfs/${smurf.id}`, smurf);
+    this.setState({ smurfs: data });
+  };
   deleteSmurf = async id => {
     const { data } = await axios.delete(`${smurfsApi}/smurfs/${id}`);
     this.setState({ smurfs: data });
   };
+  findSmurf = id => {
+    const smurf = this.state.smurfs.find(smurf => smurf.id === id);
+    this.setState({ ...this.state, smurf, editing: true });
+  };
   render() {
+    const { name, age, height, id } = this.state.smurf;
     return (
       <div className="App">
         <NavBar>
@@ -64,13 +80,33 @@ class App extends Component {
               {...props}
               smurfs={this.state.smurfs}
               deleteSmurf={this.deleteSmurf}
+              findSmurf={this.findSmurf}
             />
           )}
         />
         <Route
           path="/smurf-form"
           render={props => (
-            <SmurfForm {...props} createSmurf={this.createSmurf} />
+            <SmurfForm
+              {...props}
+              editing={this.state.editing}
+              createSmurf={this.createSmurf}
+            />
+          )}
+        />
+        <Route
+          path="/update-smurf/:id"
+          render={props => (
+            <SmurfForm
+              {...props}
+              editing={true}
+              id={id}
+              name={name}
+              age={age}
+              height={height}
+              createSmurf={this.createSmurf}
+              updateSmurf={this.updateSmurf}
+            />
           )}
         />
       </div>

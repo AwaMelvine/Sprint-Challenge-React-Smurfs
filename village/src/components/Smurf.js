@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const StyledSmurf = styled.div`
@@ -24,6 +25,14 @@ const Delete = styled.span`
   color: #ef6e6e;
 `;
 
+const Edit = styled(Link)`
+  position: absolute;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  cursor: pointer;
+  color: #3e8989;
+`;
+
 const Smurf = props => {
   return (
     <React.Fragment>
@@ -31,7 +40,13 @@ const Smurf = props => {
         <h3>{props.name}</h3>
         <strong>{props.height} tall</strong>
         <p>{props.age} smurf years old</p>
-        <Delete onClick={() => props.deleteSmurf(props.id)}>x</Delete>
+        <Delete onClick={() => props.deleteSmurf(props.id)}>delete</Delete>
+        <Edit
+          to={`/update-smurf/${props.id}`}
+          onClick={() => props.findSmurf(props.id)}
+        >
+          edit
+        </Edit>
       </StyledSmurf>
     </React.Fragment>
   );

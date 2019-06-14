@@ -28,35 +28,52 @@ const StyledSmurfForm = styled.form`
     border-radius: 0.3rem;
     font-weight: lighter;
   }
+  button {
+    border: none;
+    cursor: pointer;
+    font-weight: normal;
+    outline: none;
+    border-radius: 5px;
+    width: 100%;
+    text-align: center;
+    line-height: 1em;
+    padding: 1.125rem 2rem;
+    font-size: 1.2em;
+    color: #fff;
+  }
 `;
 
-const SubmitButton = styled.button`
-  border: none;
-  cursor: pointer;
-  font-weight: normal;
-  outline: none;
-  border-radius: 5px;
-  width: 100%;
-  text-align: center;
-  line-height: 1em;
-  padding: 1.125rem 2rem;
-  font-size: 1.2em;
+const AddButton = styled.button`
   background: #3e8989;
-  color: #fff;
 
   &:hover {
     background: #306b6b;
   }
 `;
 
+const UpdateButton = styled.button`
+  background: #3b5998;
+`;
+
 class SmurfForm extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      name: "",
-      age: "",
-      height: ""
+      id: props.id || "",
+      name: props.name || "",
+      age: props.age || "",
+      height: props.height || ""
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      ...this.state,
+      name: nextProps.name,
+      age: nextProps.age,
+      height: nextProps.height
+    });
   }
 
   addSmurf = event => {
@@ -74,33 +91,52 @@ class SmurfForm extends Component {
     this.setState({ ...this.state, [e.target.name]: e.target.value });
   };
 
+  submit = event => {
+    event.preventDefault();
+    if (this.props.editing) {
+      this.props.updateSmurf(this.state);
+      this.props.history.push("/");
+    } else {
+      this.props.createSmurf(this.state);
+      this.props.history.push("/");
+    }
+  };
+
   render() {
+    const { editing } = this.props;
+    const { name, height, age } = this.state;
+
+    const formTitle = editing ? "Update Smurf" : "Add Smurf";
+    const submitBtn = editing ? (
+      <UpdateButton type="submit">Update Smurf</UpdateButton>
+    ) : (
+      <AddButton type="submit">Add to the village</AddButton>
+    );
+
     return (
       <SmurfFormWrapper>
-        <StyledSmurfForm onSubmit={event => this.addSmurf(event)}>
+        <StyledSmurfForm onSubmit={event => this.submit(event)}>
+          <h3>{formTitle}</h3>
           <input
-            onChange={this.handleInputChange}
             placeholder="Name"
-            value={this.state.name}
+            value={name}
             onChange={event => this.handleInputChange(event)}
             name="name"
           />
           <input
             type="number"
-            onChange={this.handleInputChange}
             placeholder="Age"
-            value={this.state.age}
+            value={age}
             onChange={event => this.handleInputChange(event)}
             name="age"
           />
           <input
-            onChange={this.handleInputChange}
             placeholder="Height"
-            value={this.state.height}
+            value={height}
             onChange={event => this.handleInputChange(event)}
             name="height"
           />
-          <SubmitButton type="submit">Add to the village</SubmitButton>
+          {submitBtn}
         </StyledSmurfForm>
       </SmurfFormWrapper>
     );
