@@ -5,9 +5,9 @@ import Smurf from "./Smurf";
 const StyledSmurfsWrapper = styled.div`
   width: 50%;
   margin: 0px auto 0px;
-  border-top: 2px solid #e0e0e0;
   background: white;
   padding: 20px;
+  border-radius: 0.35rem;
   ul {
     display: flex;
     flex-wrap: wrap;
