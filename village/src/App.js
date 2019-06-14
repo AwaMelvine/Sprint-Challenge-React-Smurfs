@@ -1,11 +1,31 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Route, NavLink } from "react-router-dom";
+import styled from "styled-components";
 import "./App.css";
 import SmurfForm from "./components/SmurfForm";
 import Smurfs from "./components/Smurfs";
 
 const smurfsApi = "http://localhost:3333";
+
+const NavBar = styled.nav`
+  width: 50%;
+  margin: 0px auto;
+  display: flex;
+  justify-content: flex-end;
+  padding: 2rem 0rem 1rem 0rem;
+
+  a {
+    margin-left: 1rem;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+    &.active {
+      color: #3e8989;
+    }
+  }
+`;
 
 class App extends Component {
   constructor(props) {
@@ -28,6 +48,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <NavBar>
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="/smurf-form">Create Smurf</NavLink>
+        </NavBar>
         <Route
           exact
           path="/"
